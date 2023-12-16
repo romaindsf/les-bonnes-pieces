@@ -90,7 +90,6 @@ for(let i = pieces.length -1 ; i >= 0; i--){
         noms.splice(i,1)
     }
 }
-console.log(noms)
 //Création de l'en-tête
 
 const pElement = document.createElement('p')
@@ -130,3 +129,21 @@ for(let i=0 ; i < nomsDisponibles.length ; i++){
 const pElementDisponible = document.createElement('p')
 pElementDisponible.innerText = "Pièces disponibles:";
 document.querySelector('.disponibles').appendChild(pElementDisponible).appendChild(disponiblesElement)
+
+//input range Slider
+const slider = document.getElementById("slider")
+const rangeValue = document.getElementById("range_value")
+slider.addEventListener("change", () => {
+    rangeValue.innerText = slider.value
+    const affordablesPieces = Array.from(pieces)
+    const slideValue = parseFloat(slider.value)
+    const tolerance = -0.1
+
+    for(let i = pieces.length -1 ; i >= 0; i--){
+        if(slideValue <= pieces[i].prix + tolerance){
+            affordablesPieces.splice(i,1)
+        }
+    }
+    document.querySelector(".fiches").innerHTML = "";
+    genererPieces(affordablesPieces);
+})
