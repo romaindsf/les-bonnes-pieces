@@ -137,13 +137,14 @@ slider.addEventListener("change", () => {
     rangeValue.innerText = slider.value
     const affordablesPieces = Array.from(pieces)
     const slideValue = parseFloat(slider.value)
-    const tolerance = -0.1
+    const tolerance = -0.001
 
     for(let i = pieces.length -1 ; i >= 0; i--){
         if(slideValue <= pieces[i].prix + tolerance){
             affordablesPieces.splice(i,1)
         }
     }
+    console.log(affordablesPieces)
     document.querySelector(".fiches").innerHTML = "";
     genererPieces(affordablesPieces);
 })
